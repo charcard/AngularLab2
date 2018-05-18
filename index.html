@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="toDoApp" lang="en"></html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheet.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+     rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+<body>
+    <form>
+        
+    <h1>TODO List</h1>
+    <p>A place to store the things you have to do!</p>
+
+    <div class="filterlist">
+        <input type="text" name="filterlist" placeholder="Filter your to-dos">
+    </div>
+    <section ng-controller="toDoController as control">
+
+    <div>
+    <!-- Using the ngClass directive to conditionally apply the class of complete or incomplete to our elements based on the item.status property's value. -->
+    <ol>
+        <li ng-repeat="item in control.tasks track by $index" ng-class="{ 'linethrough': item.complete === true }">
+        <button class="finishedtask" ng-if="false === item.complete" type="button">Complete</button>
+      
+        {{ item.chore }}
+
+        <i class="material-icons">close</i>
+        </li>
+    </ol>
+
+    </div>
+
+
+    <div class="addlist">
+        <input type="text" name="addlist" placeholder="Add your to-do">
+        <button class= "add" type="button">Add</button>    
+    </div>
+</form>
+
+
+
+    <script src="https://code.angularjs.org/1.6.5/angular.min.js"></script>
+    <script src="module.js"></script>
+    <script src="controller.js"></script>
+</body>
+</html>
