@@ -11,25 +11,25 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
+    <section ng-controller="toDoController as control">
     <form>
         
     <h1>TODO List</h1>
     <p>A place to store the things you have to do!</p>
 
     <div class="filterlist">
-        <input type="text" name="filterlist" placeholder="Filter your to-dos">
+        <input type="text" name="filterlist" placeholder="Filter your to-dos" ng-model="search.chore">
     </div>
-    <section ng-controller="toDoController as control">
 
-    <div>
+    <div class="items">
     <!-- Using the ngClass directive to conditionally apply the class of complete or incomplete to our elements based on the item.status property's value. -->
     <ol>
-        <li ng-repeat="item in control.tasks track by $index" ng-class="{ 'linethrough': item.complete === true }">
-        <button class="finishedtask" ng-if="false === item.complete" type="button">Complete</button>
+        <li ng-repeat="item in control.tasks | filter: search" ng-class="{ 'linethrough': item.complete === true }">
+        <button class="finishedtask" ng-if="false === item.complete"  ng-click="control.completeTask($index);" type="button">Complete</button>
       
         {{ item.chore }}
 
-        <i class="material-icons">close</i>
+        <i class="material-icons" ng-click="control.removeTask($index);">close</i>
         </li>
     </ol>
 
@@ -37,10 +37,11 @@
 
 
     <div class="addlist">
-        <input type="text" name="addlist" placeholder="Add your to-do">
-        <button class= "add" type="button">Add</button>    
+        <input type="text" name="addlist" placeholder="Add your to-do" ng-model="control.tasks.chore">
+        <button class= "add" ng-click="control.addTask(control.tasks.chore, control.tasks.complete);" type="button">Add</button>    
     </div>
 </form>
+</section>
 
 
 
